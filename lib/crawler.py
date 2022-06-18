@@ -1,8 +1,10 @@
 import requests
-share_name = input('Please choose share code\n')
-print(share_name)
+#share_name = input('Please choose share code\n')
+#print(share_name)
+from bs4 import BeautifulSoup as bs
+
 class Crawler:
-    def __init__(self, base_url = "https://www.nasdaq.com/market-activity/stocks/snejf/historical"):
+    def __init__(self, base_url = "https://www.nasdaq.com/market-activity/stocks/aapl/historical"):
         self.base_url = base_url
 
     def get_html(self):
@@ -11,12 +13,18 @@ class Crawler:
             return r.text
         else:
             raise Exception("Server not found")
-    def get_shares(self):
-        pass
+
+    def get_shares(self, html):
+        soup = bs(html, 'html.parser')
+        shares = soup.find('tbody', 'historical-data__table-body')
+        print(shares)
 
     def start(self):
         html = self.get_html()
         self.html = html
-        self.get_shares()
+        self.get_shares(html)
 
 
+if __name__ == '__main__':
+	stocks = Crawler()
+	stocks.start()

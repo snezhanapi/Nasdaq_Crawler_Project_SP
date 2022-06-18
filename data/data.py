@@ -31,6 +31,7 @@ class DB:
 
 
 		db_config = {}
+
 		if parser.has_section(section):
 				items = parser.items(section)
 				for item in items:
@@ -43,11 +44,11 @@ class DB:
 	def view_stocks(self):
 		c = self.cnx.cursor()
 		q = f"""
-					SELECT * FROM stock_list
+					SELECT * FROM nasdaq.stock_list
 
 				"""
 		c.execute(q)
-		result = c.fetchone()
+		result = c.fetchall()
 		print(result)
 		return result
 

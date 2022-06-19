@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtWidgets as qtw
-from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel
+from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QComboBox
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
@@ -14,9 +14,7 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.setWindowTitle('Stock Prices')
 		self.setWindowIcon(QIcon('nasdaq.png'))
 		self.setGeometry(200,150,800,500)
-		label = QLabel("Hello!")
-		label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-		self.setCentralWidget(label)
+
 
 
 		self.label_image = QLabel(self)
@@ -58,6 +56,18 @@ class MainMenuWindow(qtw.QMainWindow):
 
 	def stock_menu_clicked(self):
 		self.label_image.setHidden(True)
+		#label = QLabel("StockName")
+		#label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+		#self.setCentralWidget(label)
+		stock_select_combobox = QComboBox()
+		stock_select_combobox.addItem('AAPL')
+		stock_select_layout = QVBoxLayout()
+		stock_select_layout.addWidget(stock_select_combobox)
+
+		container = qtw.QWidget()
+		container.setLayout(stock_select_layout)
+
+		self.setCentralWidget(container)
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

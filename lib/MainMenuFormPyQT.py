@@ -4,6 +4,8 @@ from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtCore import Qt
+
 class MainMenuWindow(qtw.QMainWindow):
 
 	def __init__(self , *args, **kwargs):
@@ -12,14 +14,15 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.setWindowTitle('Stock Prices')
 		self.setWindowIcon(QIcon('nasdaq.png'))
 		self.setGeometry(200,150,800,500)
-		#self.pixmap = QPixmap(r".\stock-market.jpg")
-		#self.resize(self.pixmap.width(), self.pixmap.height())
+		label = QLabel("Hello!")
+		label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+		self.setCentralWidget(label)
 
 
-		self.label = QLabel(self)
+		self.label_image = QLabel(self)
 		self.pixmap = QPixmap(".\stock-market.jpg")
-		self.label.setPixmap(self.pixmap)
-		self.label.resize(self.pixmap.width(),
+		self.label_image.setPixmap(self.pixmap)
+		self.label_image.resize(self.pixmap.width(),
 						  self.pixmap.height())
 
 
@@ -45,15 +48,20 @@ class MainMenuWindow(qtw.QMainWindow):
 		help_menu = menubar.addMenu('He&lp')
 
 		# add actions
-		view_action = stock_menu.addAction('Stock  Data')
+		view_action = stock_menu.addAction('Stock Data')
+		view_action.triggered.connect(self.stock_menu_clicked)
 		# add separator
 		#sales_menu.addSeparator()
 
 	def add_toolbar(self):
 		toolbar = self.addToolBar('File')
 
+	def stock_menu_clicked(self):
+		self.label_image.setHidden(True)
+
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)
+
 
 	window = MainMenuWindow()
 

@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QComboBo
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
-from PyQt6.QtCore import Qt
+from ..data.data import DB
 
 class MainMenuWindow(qtw.QMainWindow):
 
@@ -28,8 +28,6 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.add_menubar()
 		self.add_statusbar("Welcome!")
 		self.add_toolbar()
-
-
 
 
 	def add_statusbar(self,text):
@@ -59,15 +57,23 @@ class MainMenuWindow(qtw.QMainWindow):
 		#label = QLabel("StockName")
 		#label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 		#self.setCentralWidget(label)
+		self.stock_list_box()
+		#combobox.activated.connect(self.activated)
+
+	def stock_list_box(self):
+		self.db = DB()
+		self.list_of_stocks = db.view_stocks()
+		print(self.list_of_stocks)
 		stock_select_combobox = QComboBox()
-		stock_select_combobox.addItem('AAPL')
+		stock_select_combobox.addItems(self.list_of_stocks)
 		stock_select_layout = QVBoxLayout()
 		stock_select_layout.addWidget(stock_select_combobox)
 
 		container = qtw.QWidget()
 		container.setLayout(stock_select_layout)
-
 		self.setCentralWidget(container)
+
+
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

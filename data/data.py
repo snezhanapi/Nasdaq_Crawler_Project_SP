@@ -49,8 +49,9 @@ class DB:
 				"""
 		c.execute(q)
 		result = c.fetchall()
-		print(result)
-		return result
+		print(list(result))
+		return list(result)
+
 
 if __name__ == '__main__':
 	db = DB()

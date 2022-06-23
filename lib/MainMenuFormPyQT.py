@@ -1,10 +1,10 @@
 import sys
 from PyQt6 import QtWidgets as qtw
-from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QComboBox
+from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
-from ..data.data import DB
+from Nasdaq_Crawler_Project_SP.lib.db import DB
 
 class MainMenuWindow(qtw.QMainWindow):
 

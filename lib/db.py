@@ -51,7 +51,10 @@ class DB:
 		result = c.fetchall()
 		print(list(result))
 		return list(result)
-
+	def insert_stock(self,row):
+		cd = self.cnx.cursor()
+		sql = "INSERT INTO nasdaq.employee_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+		cd.execute(sql, tuple(row))
 
 if __name__ == '__main__':
 	db = DB()

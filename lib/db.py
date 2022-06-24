@@ -52,7 +52,7 @@ class DB:
 		print(list(result))
 		return list(result)
 	def insert_stock(self):
-		row = ('2022-05-31', 93.28, 1502, 93.28, 93.28, 93.28, 'AAPL')
+		row = ('2022-05-31', $93.28, 1502, 93.28, 93.28, 93.28, 'AAPL')
 		cd = self.cnx.cursor()
 		sql = "INSERT INTO nasdaq.stock_data (stock_date, close_last, volume, open_price, high_price, low_price, stock_code)" \
 			  "VALUES (%s,%s,%s,%s,%s,%s,%s)"

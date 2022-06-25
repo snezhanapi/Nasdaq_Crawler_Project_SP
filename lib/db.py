@@ -6,7 +6,7 @@ import datetime
 
 class DB:
 	def __init__(self):
-		db_config = DB.read_db_config(filename='../config.ini', section='MYSQL')
+		db_config = DB.read_db_config(filename='./config.ini', section='MYSQL')
 
 		try:
 			self.cnx = mysql.connector.connect(
@@ -20,7 +20,7 @@ class DB:
 			print(e)
 			exit()
 
-	def read_db_config(filename='../config.ini', section='MYSQL'):
+	def read_db_config(filename='./config.ini', section='MYSQL'):
 		""" Read database configuration file and return a dictionary object
 				:param filename: name of the configuration file
 				:param section: section of database configuration
@@ -45,13 +45,14 @@ class DB:
 	def view_stocks(self):
 		c = self.cnx.cursor()
 		q = f"""
-					SELECT * FROM nasdaq.stock_list
+					SELECT stock_code FROM nasdaq.stock_list
 
 				"""
 		c.execute(q)
 		result = c.fetchall()
-		print(list(result))
+
 		return list(result)
+
 	def insert_stock(self):
 		row = ['06/23/2022', '$83.9123', '17,903', '$83.9123', '$83.9123', '$83.9123']
 		counter = 1
@@ -79,4 +80,5 @@ class DB:
 
 if __name__ == '__main__':
 	db = DB()
-	db.insert_stock()
+	m = db.view_stocks()
+	print(m)

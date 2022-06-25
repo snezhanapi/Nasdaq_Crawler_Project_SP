@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
-from Nasdaq_Crawler_Project_SP.lib.db import DB
+from lib.db import DB
 
 class MainMenuWindow(qtw.QMainWindow):
 
@@ -23,6 +23,8 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.label_image.resize(self.pixmap.width(),
 						  self.pixmap.height())
 
+		self.stock = DB()
+		self.list_of_stocks = self.stock.view_stocks()
 
 		self.show()
 		self.add_menubar()
@@ -61,11 +63,11 @@ class MainMenuWindow(qtw.QMainWindow):
 		#combobox.activated.connect(self.activated)
 
 	def stock_list_box(self):
-		self.db = DB()
-		self.list_of_stocks = db.view_stocks()
-		print(self.list_of_stocks)
+
 		stock_select_combobox = QComboBox()
-		stock_select_combobox.addItems(self.list_of_stocks)
+		stock_list = list(list(zip(*(self.list_of_stocks)))[0])
+		stock_select_combobox.addItems(stock_list)
+
 		stock_select_layout = QVBoxLayout()
 		stock_select_layout.addWidget(stock_select_combobox)
 
@@ -77,8 +79,6 @@ class MainMenuWindow(qtw.QMainWindow):
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)
-
-
 	window = MainMenuWindow()
 
 	sys.exit(app.exec())

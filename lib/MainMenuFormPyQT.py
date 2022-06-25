@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtWidgets as qtw
-from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox
+from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox, QPushButton
 #from PyQt6 import QtCore as qtc
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
@@ -18,7 +18,7 @@ class MainMenuWindow(qtw.QMainWindow):
 
 
 		self.label_image = QLabel(self)
-		self.pixmap = QPixmap(".\stock-market.jpg")
+		self.pixmap = QPixmap(".\lib\stock-market.jpg")
 		self.label_image.setPixmap(self.pixmap)
 		self.label_image.resize(self.pixmap.width(),
 						  self.pixmap.height())
@@ -75,7 +75,16 @@ class MainMenuWindow(qtw.QMainWindow):
 		container.setLayout(stock_select_layout)
 		self.setCentralWidget(container)
 
+		stock_select_button = QPushButton()
+		stock_select_button.setText("Select")
+		#stock_select_button.move(64, 32)
+		#stock_select_button.clicked.connect(self.stock_select_button_clicked)
+		stock_select_button.show()
 
+	def stock_select_button_clicked(self):
+
+		# self.selected_stock = stock_select_combobox.currentText()
+		pass
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox, QPushButton
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
 from lib.db import DB
+from lib.crawler import Crawler
 
 class MainMenuWindow(qtw.QMainWindow):
 
@@ -84,6 +85,13 @@ class MainMenuWindow(qtw.QMainWindow):
 
 		self.selected_stock = self.stock_select_combobox.currentText()
 		print(self.selected_stock)
+		self.selected_stock = 'SNEJF'
+		base_url = 'https://www.nasdaq.com/market-activity/stocks/'+ self.selected_stock.lower() + '/historical'
+		print(base_url)
+		self.stock_crawler = Crawler(base_url)
+		self.crawler_data = self.stock_crawler.start()
+		print('ok')
+		self.list_of_stocks = self.stock.view_stocks()
 
 
 if __name__ == '__main__':

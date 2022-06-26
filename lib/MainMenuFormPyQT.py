@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox, QPushButton
 #from PyQt6 import QtGui as qtg
 from PyQt6.QtGui import QPixmap, QIcon
 from lib.db import DB
-from lib.crawler import Crawler
+from lib.crawler import Crawler_Nasdaq
 
 class MainMenuWindow(qtw.QMainWindow):
 
@@ -24,8 +24,9 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.label_image.resize(self.pixmap.width(),
 						  self.pixmap.height())
 
-		self.stock = DB()
-		self.list_of_stocks = self.stock.view_stocks()
+		self.stock_db = DB()
+		self.list_of_stocks = self.stock_db.view_stocks()
+
 
 		self.show()
 		self.add_menubar()
@@ -82,17 +83,19 @@ class MainMenuWindow(qtw.QMainWindow):
 
 
 	def stock_select_button_clicked(self):
+		self.import_crawler_data_to_db()
 
-		self.selected_stock = self.stock_select_combobox.currentText()
-		print(self.selected_stock)
-		self.selected_stock = 'SNEJF'
-		base_url = 'https://www.nasdaq.com/market-activity/stocks/'+ self.selected_stock.lower() + '/historical'
-		print(base_url)
-		self.stock_crawler = Crawler(base_url)
-		self.crawler_data = self.stock_crawler.start()
-		print('ok')
-		self.list_of_stocks = self.stock.view_stocks()
+		self.list_of_stocks = self.stock_db.view_stocks()
 
+
+	def import_crawler_data_to_db(self):
+		selected_stock = self.stock_select_combobox.currentText()
+		print(selected_stock)
+		base_stock_url = 'https://www.nasdaq.com/market-activity/stocks/' + selected_stock.lower() + '/historical'
+		print(base_stock_url)
+		self.stock_crawler = Crawler_Nasdaq(base_stock_url)
+		crawler_data = self.stock_crawler.start()
+		print(crawler_data)
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

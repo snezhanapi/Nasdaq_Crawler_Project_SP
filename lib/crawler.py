@@ -7,13 +7,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class Crawler:
+class Crawler_Nasdaq:
 	def __init__(self, base_url):
 		self.base_url = base_url
 
 		### To prevent download dialog and set download location
 		# set absolute path to folder to be used for downloads:
-		#download_folder = 'C:/Snejana_PC/Python/homework-snezhanapi/Nasdaq_Crawler_Project_SP/data'
+		download_folder = 'C:/Snejana_PC/Python/homework-snezhanapi/Nasdaq_Crawler_Project_SP/data'
 
 		chrome_options = Options()
 		prefs = {
@@ -42,14 +42,16 @@ class Crawler:
 		# Get TR elements only when they are loaded - best practice:
 		table_rows = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,'tr.historical-data__row')))
 
+
 		# next will work if elements are loaded, but we can not be sure when they will
 		# table_rows = self.driver.find_elements(By.CSS_SELECTOR, 'tr.historical-data__row')
 
 		print(f'Scraped {len(table_rows)} data rows.')
 		for row in table_rows:
-			print(row.text)
 			row_list = list(row.text.split(" "))
+			#stock_data = self.stock_db.insert_stock(row)
 			print(row_list)
+
 
 	def download_data(self):
 		# click on "Download data" button only when it is ready:
@@ -59,9 +61,10 @@ class Crawler:
 
 
 	def start(self):
+
 		print('Test getting table rows:')
 		self.get_table_rows()
-
+		return "OK"
 		#print('Test download data: ')
 		#self.download_data()
 		#print('File is downloaded!')

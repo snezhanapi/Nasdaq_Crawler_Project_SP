@@ -120,7 +120,7 @@ class MainMenuWindow(qtw.QMainWindow):
 
 		header = ("stock_date", "close_last", "volume", "open_price", "high_price", "low_price", "stock_code")
 
-		stock_data = self.stock_data_selected
+		stock_data = list(self.stock_data_selected)
 
 		return {
 			"header":header,

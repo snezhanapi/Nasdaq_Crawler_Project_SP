@@ -11,12 +11,15 @@ class MainWindow(MainMenuWindow):
 
     def stock_select_button_clicked(self):
         data = self.import_crawler_data_to_db()
+        print('This is data for table')
+        print(data)
         self.list_of_stocks = self.stock_db.view_stocks()
         self.stock_select_combobox.setHidden(True)
         self.stock_select_button.setHidden(True)
-        print("worked")
+
         stock_table = Table()
-        stock_table.create_table(data)
+        print("worked")
+        stock_table.createTable(data)
 
 
 if __name__ == "__main__":

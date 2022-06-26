@@ -6,28 +6,27 @@ from PyQt6 import QtGui as qtg
 
 
 class Table(qtw.QTableWidget):
-	def __init__(self):
+	def __init__(self,stock_data):
 		super().__init__()
+		self.stock_data = stock_data
+		self.createTable(stock_data)
+		self.table.show()
 
 
-		#self.createTable()
-
-
-
-	def createTable(self,data):
-		rows = len(self.data['data'])
-		cols = len(self.data['header'])
+	def createTable(self, data):
+		rows = len(data['data'])
+		cols = len(data['header'])
 
 		# init table
 		table = qtw.QTableWidget()
 		table.setRowCount(rows)
 		table.setColumnCount(cols)
-		table.setHorizontalHeaderLabels(self.data['header'])
+		table.setHorizontalHeaderLabels(data['header'])
 		# table.setMinimumHeight(rows*100)
 		# table.setMinimumWidth(cols*300)
 
 		# set data
-		for i,row in enumerate(self.data['data']):
+		for i,row in enumerate(data['data']):
 			for j,item in enumerate(row):
 				table.setItem(i,j,qtw.QTableWidgetItem(item))
 
@@ -40,7 +39,7 @@ class Table(qtw.QTableWidget):
 
 
 		self.table = table
-		self.table.show()
+
 
 
 

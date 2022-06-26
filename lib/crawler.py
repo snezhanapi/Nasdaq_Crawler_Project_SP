@@ -51,11 +51,11 @@ class Crawler_Nasdaq:
 
 
 
-	def download_data(self):
+	#def download_data(self):
 		# click on "Download data" button only when it is ready:
-		WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(
-			(By.CSS_SELECTOR,'.historical-data__controls-button--download'))
-		).click()
+		#WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(
+		#	(By.CSS_SELECTOR,'.historical-data__controls-button--download'))
+		#).click()
 
 
 	def start(self):

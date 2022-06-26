@@ -45,6 +45,7 @@ class Table(qtw.QTableWidget):
 		header = ("stock_date", "close_last", "volume", "open_price", "high_price", "low_price", "stock_code")
 		self.main_menu_form = MainMenuWindow()
 		data = self.main_menu_form.stock_data_table()
+		print("data taken from main menu")
 		#self.db = DB()
 		#data = self.db.view_sales()
 		#(1, datetime.date(2022, 1, 28), 1, 'Sale1', 1, 1, 10000.0)
@@ -55,3 +56,9 @@ class Table(qtw.QTableWidget):
 			"header":header,
 			"data":data
 		}
+
+if __name__ == '__main__':
+	app = qtw.QApplication(sys.argv)
+	window = Table()
+
+	sys.exit(app.exec())

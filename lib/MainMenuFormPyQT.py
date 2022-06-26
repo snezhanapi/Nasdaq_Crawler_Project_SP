@@ -9,6 +9,7 @@ from lib.crawler import Crawler_Nasdaq
 from dateutil import parser
 import datetime
 
+
 class MainMenuWindow(qtw.QMainWindow):
 
 	def __init__(self , *args, **kwargs):
@@ -28,7 +29,6 @@ class MainMenuWindow(qtw.QMainWindow):
 
 		self.stock_db = DB()
 		self.list_of_stocks = self.stock_db.view_stocks()
-
 
 		self.show()
 		self.add_menubar()
@@ -73,21 +73,17 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.stock_select_combobox.addItems(stock_list)
 
 		stock_select_layout = QVBoxLayout()
-		stock_select_button = QPushButton("Select")
+		self.stock_select_button = QPushButton("Select")
 
 		stock_select_layout.addWidget(self.stock_select_combobox)
-		stock_select_layout.addWidget(stock_select_button)
+		stock_select_layout.addWidget(self.stock_select_button)
 		container = qtw.QWidget()
 		container.setLayout(stock_select_layout)
 		self.setCentralWidget(container)
-		stock_select_button.show()
-		stock_select_button.clicked.connect(self.stock_select_button_clicked)
+		self.stock_select_button.show()
+		self.stock_select_button.clicked.connect(self.stock_select_button_clicked)
 
 
-	def stock_select_button_clicked(self):
-		self.import_crawler_data_to_db()
-
-		self.list_of_stocks = self.stock_db.view_stocks()
 
 
 	def import_crawler_data_to_db(self):

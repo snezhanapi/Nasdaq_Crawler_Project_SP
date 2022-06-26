@@ -1,8 +1,7 @@
 import mysql.connector
 #pip install configparser
 from configparser import ConfigParser
-from dateutil import parser
-import datetime
+
 
 class DB:
 	def __init__(self):
@@ -55,22 +54,7 @@ class DB:
 
 	def insert_stock(self):
 		row = ['06/23/2022', '$83.9123', '17,903', '$83.9123', '$83.9123', '$83.9123']
-		counter = 1
-		stock_data_list = list()
-		stock = "AAPL"
-		for i in row:
-			# print(i)
-			if counter == 1:
-				stock_date = parser.parse(i)
-				i = stock_date.date().isoformat()
-			elif counter == 3:
-				i = int(i.replace(',', ''))
-			else:
-				i = float(i.replace('$', ''))
-			counter += 1
-			stock_data_list.append(i)
 
-		stock_data_list.append(stock)
 		cd = self.cnx.cursor()
 		sql = "INSERT INTO nasdaq.stock_data (stock_date, close_last, volume, open_price, high_price, low_price, stock_code)" \
 			  "VALUES (%s,%s,%s,%s,%s,%s,%s)"

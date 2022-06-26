@@ -6,6 +6,8 @@ from PyQt6.QtWidgets import QVBoxLayout, QLabel, QComboBox, QPushButton
 from PyQt6.QtGui import QPixmap, QIcon
 from lib.db import DB
 from lib.crawler import Crawler_Nasdaq
+from dateutil import parser
+import datetime
 
 class MainMenuWindow(qtw.QMainWindow):
 
@@ -94,8 +96,29 @@ class MainMenuWindow(qtw.QMainWindow):
 		base_stock_url = 'https://www.nasdaq.com/market-activity/stocks/' + selected_stock.lower() + '/historical'
 		print(base_stock_url)
 		self.stock_crawler = Crawler_Nasdaq(base_stock_url)
-		crawler_data = self.stock_crawler.start()
+		crawler_data = self.stock_crawler.get_table_rows()
 		print(crawler_data)
+		for row in crawler_data:
+			row_list = list(row.text.split(" "))
+			#stock_data = self.stock_db.insert_stock(row)
+			counter = 1
+			stock_data_list = list()
+			for i in row_list:
+				if counter == 1:
+					stock_date = parser.parse(i)
+					i = stock_date.date().isoformat()
+				elif counter == 3:
+					i = int(i.replace(',', ''))
+				else:
+					i = float(i.replace('$', ''))
+				counter += 1
+				stock_data_list.append(i)
+
+			stock_data_list.append(selected_stock)
+			print(stock_data_list)
+
+
+
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

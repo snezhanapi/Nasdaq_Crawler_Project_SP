@@ -36,7 +36,7 @@ class Crawler_Nasdaq:
 
 		### click on Accept Cookies button, after it is shown:
 		WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'#onetrust-accept-btn-handler'))).click()
-		self.start()
+		#self.start()
 
 	def get_table_rows(self):
 		# Get TR elements only when they are loaded - best practice:
@@ -47,10 +47,8 @@ class Crawler_Nasdaq:
 		# table_rows = self.driver.find_elements(By.CSS_SELECTOR, 'tr.historical-data__row')
 
 		print(f'Scraped {len(table_rows)} data rows.')
-		for row in table_rows:
-			row_list = list(row.text.split(" "))
-			#stock_data = self.stock_db.insert_stock(row)
-			print(row_list)
+		return table_rows
+
 
 
 	def download_data(self):
@@ -64,7 +62,7 @@ class Crawler_Nasdaq:
 
 		print('Test getting table rows:')
 		self.get_table_rows()
-		return "OK"
+
 		#print('Test download data: ')
 		#self.download_data()
 		#print('File is downloaded!')

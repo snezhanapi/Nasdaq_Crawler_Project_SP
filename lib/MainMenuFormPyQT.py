@@ -98,6 +98,7 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.stock_crawler = Crawler_Nasdaq(base_stock_url)
 		crawler_data = self.stock_crawler.get_table_rows()
 		print(crawler_data)
+		self.stock_data_selected = list()
 		for row in crawler_data:
 			row_list = list(row.text.split(" "))
 
@@ -114,10 +115,15 @@ class MainMenuWindow(qtw.QMainWindow):
 				counter += 1
 				stock_data_list.append(i)
 
+
 			stock_data_list.append(selected_stock)
+
 			print(stock_data_list)
 			self.stock_db.insert_stock(stock_data_list)
+			self.stock_data_table_list = self.stock_data_selected.append(stock_data_list)
 
+	def stock_data_table(self):
+		return self.stock_data_table_list
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

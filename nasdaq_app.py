@@ -7,16 +7,17 @@ class MainWindow(MainMenuWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.show()
-        self.stock_table = Table()
+
 
     def stock_select_button_clicked(self):
-        self.import_crawler_data_to_db()
+        data = self.import_crawler_data_to_db()
         self.list_of_stocks = self.stock_db.view_stocks()
         self.stock_select_combobox.setHidden(True)
         self.stock_select_button.setHidden(True)
         print("worked")
-        #self.stock_table.show()
-		#add as any properties here...
+        stock_table = Table()
+        stock_table.create_table(data)
+
 
 if __name__ == "__main__":
     app = qtw.QApplication(sys.argv)

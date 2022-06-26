@@ -116,10 +116,17 @@ class MainMenuWindow(qtw.QMainWindow):
 
 			print(stock_data_list)
 			self.stock_db.insert_stock(stock_data_list)
-			self.stock_data_table_list = self.stock_data_selected.append(stock_data_list)
+			self.stock_data_selected.append(stock_data_list)
 
-	def stock_data_table(self):
-		return self.stock_data_table_list
+		header = ("stock_date", "close_last", "volume", "open_price", "high_price", "low_price", "stock_code")
+
+		stock_data = self.stock_data_selected
+
+		return {
+			"header":header,
+			"data":stock_data
+		}
+
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

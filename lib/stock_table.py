@@ -3,22 +3,23 @@ import sys
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
-from lib.MainMenuFormPyQT import MainMenuWindow
+
 
 class Table(qtw.QTableWidget):
-	def __init__(self, parent):
+	def __init__(self):
 		super().__init__()
-		self.data = self.load_data()
-		self.createTable(parent)
+
+
+		#self.createTable()
 
 
 
-	def createTable(self,parent):
+	def createTable(self,data):
 		rows = len(self.data['data'])
 		cols = len(self.data['header'])
 
 		# init table
-		table = qtw.QTableWidget(parent=parent)
+		table = qtw.QTableWidget()
 		table.setRowCount(rows)
 		table.setColumnCount(cols)
 		table.setHorizontalHeaderLabels(self.data['header'])
@@ -39,23 +40,9 @@ class Table(qtw.QTableWidget):
 
 
 		self.table = table
-		# self.table.show()
+		self.table.show()
 
-	def load_data(self):
-		header = ("stock_date", "close_last", "volume", "open_price", "high_price", "low_price", "stock_code")
-		self.main_menu_form = MainMenuWindow()
-		data = self.main_menu_form.stock_data_table()
-		print("data taken from main menu")
-		#self.db = DB()
-		#data = self.db.view_sales()
-		#(1, datetime.date(2022, 1, 28), 1, 'Sale1', 1, 1, 10000.0)
 
-		print(data)
-
-		return {
-			"header":header,
-			"data":data
-		}
 
 if __name__ == '__main__':
 	app = qtw.QApplication(sys.argv)

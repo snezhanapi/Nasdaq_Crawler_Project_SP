@@ -116,11 +116,11 @@ class MainMenuWindow(qtw.QMainWindow):
 
 			print(stock_data_list)
 			self.stock_db.insert_stock(stock_data_list)
-			self.stock_data_selected.append(stock_data_list)
+			self.stock_data_selected.append(tuple(map(str,stock_data_list)))
 
 		header = ("stock_date", "close_last", "volume", "open_price", "high_price", "low_price", "stock_code")
 
-		stock_data = list(self.stock_data_selected)
+		stock_data = tuple(self.stock_data_selected)
 
 		return {
 			"header":header,

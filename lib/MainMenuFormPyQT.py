@@ -100,7 +100,7 @@ class MainMenuWindow(qtw.QMainWindow):
 		print(crawler_data)
 		for row in crawler_data:
 			row_list = list(row.text.split(" "))
-			#stock_data = self.stock_db.insert_stock(row)
+
 			counter = 1
 			stock_data_list = list()
 			for i in row_list:
@@ -116,8 +116,7 @@ class MainMenuWindow(qtw.QMainWindow):
 
 			stock_data_list.append(selected_stock)
 			print(stock_data_list)
-
-
+			self.stock_db.insert_stock(stock_data_list)
 
 
 if __name__ == '__main__':

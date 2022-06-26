@@ -16,9 +16,9 @@ class MainWindow(MainMenuWindow):
         self.stock_select_combobox.setHidden(True)
         self.stock_select_button.setHidden(True)
 
-        stock_table = Table(stock_data_table)
+        stock_table = Table()
+        stock_table.createTable(stock_data_table)
 
-        #stock_table.createTable(stock_data_table)
         print("finished")
 
 if __name__ == "__main__":

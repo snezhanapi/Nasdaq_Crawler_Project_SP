@@ -6,10 +6,10 @@ from PyQt6 import QtGui as qtg
 
 
 class Table(qtw.QTableWidget):
-	def __init__(self):
+	def __init__(self, stock_data):
 		super().__init__()
 
-		#self.createTable(stock_data)
+		self.createTable(stock_data)
 		#self.table.show()
 
 

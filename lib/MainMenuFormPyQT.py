@@ -72,13 +72,13 @@ class MainMenuWindow(qtw.QMainWindow):
 		stock_list = list(list(zip(*(self.list_of_stocks)))[0])
 		self.stock_select_combobox.addItems(stock_list)
 
-		stock_select_layout = QVBoxLayout()
+		self.stock_select_layout = QVBoxLayout()
 		self.stock_select_button = QPushButton("Select")
 
-		stock_select_layout.addWidget(self.stock_select_combobox)
-		stock_select_layout.addWidget(self.stock_select_button)
+		self.stock_select_layout.addWidget(self.stock_select_combobox)
+		self.stock_select_layout.addWidget(self.stock_select_button)
 		container = qtw.QWidget()
-		container.setLayout(stock_select_layout)
+		container.setLayout(self.stock_select_layout)
 		self.setCentralWidget(container)
 		self.stock_select_button.show()
 		self.stock_select_button.clicked.connect(self.stock_select_button_clicked)

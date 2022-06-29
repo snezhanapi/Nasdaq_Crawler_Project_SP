@@ -1,8 +1,9 @@
 import mysql.connector
 #pip install configparser
 from configparser import ConfigParser
+import os
 
-
+print(f'CWD:{os.getcwd()} ')
 class DB:
 	def __init__(self):
 		db_config = DB.read_db_config(filename='./config.ini', section='MYSQL')
@@ -52,6 +53,16 @@ class DB:
 
 		return list(result)
 
+	def get_stock_data(self):
+		c = self.cnx.cursor()
+		q = f"""
+				select * from stock_data;
+			"""
+		c.execute(q)
+		result = c.fetchall()
+
+		return list(result)
+
 	def insert_stock(self,stock_data_list):
 
 		cd = self.cnx.cursor()
@@ -63,5 +74,5 @@ class DB:
 
 if __name__ == '__main__':
 	db = DB()
-	m = db.view_stocks()
+	m = db.get_stock_data()
 	print(m)

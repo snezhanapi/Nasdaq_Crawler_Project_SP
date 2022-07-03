@@ -61,6 +61,17 @@ class DB:
 		self.cnx.commit()
 		cd.close()
 
+	def get_stock_data(self,selected_stock):
+		c = self.cnx.cursor()
+		q = f"""
+				select * from stock_data WHERE stock_code = %s;
+			"""
+		c.execute(q,selected_stock)
+		result = c.fetchall()
+
+		return list(result)
+
+
 if __name__ == '__main__':
 	db = DB()
 	m = db.view_stocks()

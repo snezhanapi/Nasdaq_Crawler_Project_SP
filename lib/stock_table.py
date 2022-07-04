@@ -3,40 +3,43 @@ import sys
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
-
+import datetime
 
 class Table(qtw.QTableWidget):
 	def __init__(self, stock_data):
 		super().__init__()
-
+		print("table started")
 		self.createTable(stock_data)
 		#self.table.show()
 
 
 	def createTable(self, data):
+		print(f"Data in create table:{data}")
 		rows = len(data['data'])
 		cols = len(data['header'])
 
 		# init table
-		self.table = qtw.QTableWidget()
-		self.table.setRowCount(rows)
-		self.table.setColumnCount(cols)
-		self.table.setHorizontalHeaderLabels(data['header'])
+		#self.table = qtw.QTableWidget()
+		self.setRowCount(rows)
+		self.setColumnCount(cols)
+		self.setHorizontalHeaderLabels(data['header'])
 		# table.setMinimumHeight(rows*100)
 		# table.setMinimumWidth(cols*300)
 
 		# set data
 		for i,row in enumerate(data['data']):
 			for j,item in enumerate(row):
-				self.table.setItem(i,j,qtw.QTableWidgetItem(item))
+				if isinstance(item, datetime.date):
+					item = item.strftime('%Y-%m-%d')
+				self.setItem(i, j, qtw.QTableWidgetItem(str(item)))
 
-		self.table.resizeColumnsToContents()
+		self.resizeColumnsToContents()
 
 		# streach table:
 		# table.horizontalHeader().setSectionResizeMode(qtw.QHeaderView.Stretch)
 		# table.verticalHeader().setSectionResizeMode(qtw.QHeaderView.Stretch)
 
-		self.table.show()
+		#self.table.show()
 
 
 

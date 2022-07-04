@@ -2,10 +2,11 @@ import mysql.connector
 #pip install configparser
 from configparser import ConfigParser
 
-
+FILENAME = './config.ini'
 class DB:
 	def __init__(self):
-		db_config = DB.read_db_config(filename='./config.ini', section='MYSQL')
+
+		db_config = DB.read_db_config(filename=FILENAME, section='MYSQL')
 
 		try:
 			self.cnx = mysql.connector.connect(
@@ -15,11 +16,12 @@ class DB:
 				host=db_config['host'],
 				port=db_config['port']
 			)
+			self.db_config = db_config
 		except mysql.connector.Error as e:
 			print(e)
 			exit()
 
-	def read_db_config(filename='./config.ini', section='MYSQL'):
+	def read_db_config(filename=FILENAME, section='MYSQL'):
 		""" Read database configuration file and return a dictionary object
 				:param filename: name of the configuration file
 				:param section: section of database configuration
@@ -66,13 +68,23 @@ class DB:
 		q = f"""
 				select * from stock_data WHERE stock_code = %s;
 			"""
-		c.execute(q,selected_stock)
+		c.execute(q,(selected_stock,))
 		result = c.fetchall()
 
 		return list(result)
 
+	def get_column_names(self):
+		c = self.cnx.cursor()
+		q = f"""
+						DESCRIBE stock_data;
+					"""
+		c.execute(q)
+		result = c.fetchall()
+		column_names = [element[0] for element in result]
+		return column_names
 
 if __name__ == '__main__':
 	db = DB()
-	m = db.view_stocks()
+	m = db.get_column_names()
+
 	print(m)

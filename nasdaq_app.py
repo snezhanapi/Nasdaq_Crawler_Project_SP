@@ -18,16 +18,14 @@ class MainWindow(MainMenuWindow):
         self.stock_select_button.setHidden(True)
         self.stock_table = Table(stock_data_table)
 
-        #self.table = qtw.QTableView()
-        #self.model = TableModel(stock_data_table)
-        #self.table.setModel(self.model)
-        stock_table_layout = qtw.QVBoxLayout()
-        stock_table_layout.addWidget(self.stock_table)
-        container = qtw.QWidget(self)
-        container.setLayout(stock_table_layout)
-        self.setCentralWidget(container)
-
-        print("finished")
+        # self.table = qtw.QTableView()
+        # self.model = TableModel(stock_data_table)
+        # self.table.setModel(self.model)
+        #stock_table_layout = qtw.QVBoxLayout()
+        #stock_table_layout.addWidget(self.stock_table)
+        #container = qtw.QWidget(self)
+        #container.setLayout(stock_table_layout)
+        #self.setCentralWidget(container)
 
 if __name__ == "__main__":
     app = qtw.QApplication(sys.argv)

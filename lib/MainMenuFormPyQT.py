@@ -30,11 +30,11 @@ class MainMenuWindow(qtw.QMainWindow):
 		self.stock_db = DB()
 		self.list_of_stocks = self.stock_db.view_stocks()
 
-		self.show()
+
 		self.add_menubar()
 		self.add_statusbar("Welcome!")
-		self.add_toolbar()
-
+		#self.add_toolbar()
+		self.show()
 
 	def add_statusbar(self,text):
 		s = qtw.QStatusBar(self)
@@ -55,8 +55,8 @@ class MainMenuWindow(qtw.QMainWindow):
 		# add separator
 		#sales_menu.addSeparator()
 
-	def add_toolbar(self):
-		toolbar = self.addToolBar('File')
+	#def add_toolbar(self):
+		#toolbar = self.addToolBar('File')
 
 	def stock_menu_clicked(self):
 		self.label_image.setHidden(True)
